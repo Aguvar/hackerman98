@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bat : MonoBehaviour
 {
@@ -7,10 +8,25 @@ public class Bat : MonoBehaviour
     private float currentPositionX;
     private float interpolationDistance = 0;
 
+    public int lives = 3;
+
+    public UnityEvent gotHurtEvent;
+
+
+    private void Awake()
+    {
+        if (gotHurtEvent == null)
+        {
+            gotHurtEvent = new UnityEvent();
+        }
+        
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         currentPositionX = transform.position.x;
+
     }
 
     // Update is called once per frame
@@ -33,5 +49,14 @@ public class Bat : MonoBehaviour
         {
             interpolationDistance += Time.deltaTime * 0.1f;
         }   
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag.Contains("Hazard"))
+        {
+            lives--;
+            gotHurtEvent.Invoke();
+        }
     }
 }
