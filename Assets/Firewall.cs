@@ -32,7 +32,11 @@ public class Firewall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        spriteRenderer.enabled = false;
-        audioSource.Play();
+        if (collision.gameObject.tag == "Player")
+        {
+            spriteRenderer.enabled = false;
+            audioSource.Play();
+        }
+        
     }
 }
