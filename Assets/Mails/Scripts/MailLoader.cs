@@ -9,18 +9,19 @@ public class MailLoader
     const string BASE_PATH = "Prefabs/Mails";
     const string NORMAL_MAIL_PATH = "Normal";
     const string SPAM_MAIL_PATH = "Spam";
-    const string MISC_MAIL_PATH = "Misc";
+    const string ANSWER_MAIL_PATH = "Answer";
+    const string CATEGORY_MAIL_PATH = "Cat";
 
     public static string GetRandomEmailPath() {
-        //int rand = Random.Range(0,3);
-        int rand = 0;
+        int rand = Random.Range(0,5); //0, 3, 4 tiran mails normales, que son la mayoría
+        //int rand = 0;
         switch (rand) {
             case 0:
                 return GetNormalEmailPath();
             case 1:
                 return GetSpamEmailPath();
             case 2:
-                return GetMiscEmailPath();
+                return GetAnswerEmailPath();
             default:
                 return GetNormalEmailPath();
         }
@@ -37,8 +38,8 @@ public class MailLoader
         return result;
     }
 
-    public static string GetMiscEmailPath() {
-        string result = string.Format("{0}/{1}/{2}", BASE_PATH, MISC_MAIL_PATH, miscMails[Random.Range(0,miscMails.Length - 1)]);
+    public static string GetAnswerEmailPath() {
+        string result = string.Format("{0}/{1}/{2}", BASE_PATH, ANSWER_MAIL_PATH, answerMails[Random.Range(0,answerMails.Length - 1)]);
         return result;
     }
 
@@ -77,7 +78,14 @@ public class MailLoader
         "spam20",
     };
 
-    static string[] miscMails = {
+    static string[] answerMails = {
+        "answer1",
+        "answer2",
+        "answer3",
+        "answer4",
+    };
+
+    static string[] catMails = {
         "misc`1",
     };
 
