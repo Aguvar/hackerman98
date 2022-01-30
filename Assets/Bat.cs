@@ -9,6 +9,7 @@ public class Bat : MonoBehaviour
     private float interpolationDistance = 0;
 
     public int lives = 3;
+    public float speed = 1;
 
     public UnityEvent gotHurtEvent;
 
@@ -19,7 +20,7 @@ public class Bat : MonoBehaviour
         {
             gotHurtEvent = new UnityEvent();
         }
-        
+
     }
 
     // Start is called before the first frame update
@@ -47,8 +48,8 @@ public class Bat : MonoBehaviour
 
         if (interpolationDistance < 1)
         {
-            interpolationDistance += Time.deltaTime * 0.1f;
-        }   
+            interpolationDistance += Time.deltaTime * (speed / 10);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

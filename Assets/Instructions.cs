@@ -16,7 +16,7 @@ public class Instructions : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(1);
         }
         
     }

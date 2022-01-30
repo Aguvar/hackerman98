@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 3
+  speed: 2
   gotHurtEvent:
     m_PersistentCalls:
       m_Calls: []
