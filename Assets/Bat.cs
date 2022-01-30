@@ -25,14 +25,14 @@ public class Bat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentPositionX = transform.position.x;
+        currentPositionX = transform.localPosition.x;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(currentPositionX, Mathf.Lerp(transform.position.y, yPositions[currentPositionYIndex], interpolationDistance), 0);
+        transform.localPosition = new Vector3(currentPositionX, Mathf.Lerp(transform.position.y, yPositions[currentPositionYIndex], interpolationDistance), 0);
 
         if (Input.GetKeyDown(KeyCode.W) && currentPositionYIndex < 2)
         {
