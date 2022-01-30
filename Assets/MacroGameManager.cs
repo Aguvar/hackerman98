@@ -41,11 +41,18 @@ public class MacroGameManager : MonoBehaviour
             minigameManager.gameObject.SetActive(true);
             minigameManager.EnableMinigame();
         }
+        if (batLoops == 2 && hackLoops == 2)
+            Victory();
+           
     }
 
     void GameOver()
     {
         SceneManager.LoadScene(2);
+    }
+    void Victory()
+    {
+        SceneManager.LoadScene(3);
     }
 
 
