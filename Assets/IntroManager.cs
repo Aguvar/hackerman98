@@ -8,6 +8,7 @@ public class IntroManager : MonoBehaviour
     public GameObject creditPanel;
     public AudioSource trackSource;
     public int secondsForMusic = 4;
+    public GameObject instructionsPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class IntroManager : MonoBehaviour
     public void StartGame()
     {
         print("Starting Game");
+        instructionsPanel.SetActive(true);
     }
 
     public void QuitGame()
