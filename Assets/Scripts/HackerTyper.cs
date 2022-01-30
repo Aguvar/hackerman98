@@ -9,6 +9,7 @@ using TMPro;
 public class HackerTyper : MonoBehaviour
 {
     //why bother
+    public GameObject Paneloide;
     public TextMeshProUGUI PastaText;
     public string[] chosenPasta;
     public KeyCode[] listaInput;
@@ -16,6 +17,7 @@ public class HackerTyper : MonoBehaviour
     public float textCD; // cooldown before inputting more text
     private int magicNum;
     private int pastaCount;
+    private int keyStrokeCount;
 
     // Start is called before the first frame update
 
@@ -35,6 +37,7 @@ public class HackerTyper : MonoBehaviour
 
     private void CerrandoHackertexto()
     { // llamá esto cuando esté siendo cerrada la ventana hacker para que en la versión final no haya un memory leak leve
+        if (textAdderCR != null)
         StopCoroutine(textAdderCR);
     }
 
@@ -46,7 +49,7 @@ public class HackerTyper : MonoBehaviour
             {
                 if (textoParaAgregar.Length > 20)
                 { //Si hay mas de estos caracteres empieza a agregar más de uno por frame
-                    int lengthToAdd = (textoParaAgregar.Length / 10);
+                    int lengthToAdd = (textoParaAgregar.Length / 2);
                     PastaText.text = PastaText.text + textoParaAgregar.Substring(0, lengthToAdd);
                     textoParaAgregar = textoParaAgregar.Substring(lengthToAdd);
                 }
@@ -60,10 +63,8 @@ public class HackerTyper : MonoBehaviour
         }
     }
 
-    void Start()
+    public void BeginHack()
     {
-
-
         CoolTextStarter();
         PastaText.text = ("");
         pastaCount = 0;
@@ -73,6 +74,13 @@ public class HackerTyper : MonoBehaviour
         magicNum = Random.Range(0, strValues.Length);
         char separationator = ('+');
         chosenPasta = strValues[magicNum].Split(separationator);
+
+        Debug.Log("Limite Tecleo: " + (chosenPasta.Length - chosenPasta.Length / 10));
+    }
+
+    private void Start()
+    {
+        Paneloide = GameObject.FindGameObjectWithTag("Panel");
     }
 
     //private void OnGUI(){
@@ -113,26 +121,39 @@ public class HackerTyper : MonoBehaviour
         {
             if (Input.GetKeyDown(tecla) )
             {
+                keyStrokeCount++;
                 tecleo();
 
             }
         }
         textCD = textCD - 1 * Time.deltaTime;
+        if (keyStrokeCount == chosenPasta.Length - chosenPasta.Length / 10)
+        {
+            EndHack();
+        }
+
+    }
+
+    public void EndHack()
+    {
+        CerrandoHackertexto();
+        PastaText.gameObject.SetActive(false);
+        Paneloide.SetActive(false);
+        gameObject.SetActive(false);
     }
 
     private void tecleo()
     {
+
         if (textCD <= 0 && pastaCount < chosenPasta.Length)
         {
-
-            //PastaText.text += chosenPasta[pastaCount];
             CoolTextAdder(chosenPasta[pastaCount]);
             pastaCount++;
-            textCD = 0.6f;
-            Debug.Log("Pasta Count = " + pastaCount + ", Longitud de la Pasta = " + chosenPasta.Length);
+            textCD = 0.05f;
+            //Debug.Log("Pasta Count = " + pastaCount + ", Longitud de la Pasta = " + chosenPasta.Length);
         }
-        else
-            Debug.Log("No arrancó. Pasta Count = "+ + pastaCount + ", Longitud de la Pasta = " + chosenPasta.Length);
+        //else
+        //    Debug.Log("No arrancó. Pasta Count = "+ + pastaCount + ", Longitud de la Pasta = " + chosenPasta.Length);
     }
     // Update is called once per frame
 
