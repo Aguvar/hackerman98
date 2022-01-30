@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MailsManager : MonoBehaviour {
@@ -25,6 +26,13 @@ public class MailsManager : MonoBehaviour {
 
     public TextMesh mailSubject;
 
+    public AudioSource mailAudio;
+
+    public AudioClip wrong;
+
+    public AudioClip right;
+
+    public AudioClip newMail;
 
     private bool failGrace = false;
 
@@ -34,6 +42,8 @@ public class MailsManager : MonoBehaviour {
             return _instance;
         }
     }
+
+    public UnityEvent gameOverEvent;
 
 
     private GameObject currentMail = null;
@@ -73,6 +83,7 @@ public class MailsManager : MonoBehaviour {
         } else {
             mailCount = mailSum;
         }
+        mailAudio.PlayOneShot(newMail);
         CheckNextEmail();
     }
 
@@ -173,7 +184,7 @@ public class MailsManager : MonoBehaviour {
     }
 
     public void TriggerDefeat() {
-        //Triggerear el estado de perder el juego acá
+        gameOverEvent.Invoke();
     }
 
 
@@ -188,10 +199,12 @@ public class MailsManager : MonoBehaviour {
 
     private void MailWinInternal() {
         NextMail();
+        mailAudio.PlayOneShot(right);
     }
 
     private void MailLoseInternal() {
         AddEmails(mailPenalty);
+        mailAudio.PlayOneShot(wrong);
         StartCoroutine(EmailGracePeriod());
     }
 

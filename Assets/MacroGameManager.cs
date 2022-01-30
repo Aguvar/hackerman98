@@ -18,6 +18,7 @@ public class MacroGameManager : MonoBehaviour
         hackLoops = 0;
         batLoops = 0;
         minigameManager.gameOverEvent.AddListener(GameOver);
+        MailsManager.Instance.gameOverEvent.AddListener(GameOver);
     }
 
     // Update is called once per frame
