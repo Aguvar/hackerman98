@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class MinigameManager : MonoBehaviour
@@ -22,10 +22,21 @@ public class MinigameManager : MonoBehaviour
 
     private List<GameObject> UIHearts;
 
+    public UnityEvent gameOverEvent;
+
     private float spawnTimeCounter = 0f;
     // Start is called before the first frame update
+    private void Awake()
+    {
+        if (gameOverEvent == null)
+        {
+            gameOverEvent = new UnityEvent();
+        }
+    }
+
     void Start()
     {
+
         UIHearts = new List<GameObject>();
         bat.gotHurtEvent.AddListener(gotHurt);
         for (int i = 0; i < bat.lives; i++)
@@ -60,7 +71,14 @@ public class MinigameManager : MonoBehaviour
 
     public void gotHurt()
     {
-        Destroy(UIHearts[bat.lives]);
+        if (bat.lives == 0)
+        {
+            gameOverEvent.Invoke();
+        }
+        else
+        {
+            Destroy(UIHearts[bat.lives]);
+        }
     }
 
 }

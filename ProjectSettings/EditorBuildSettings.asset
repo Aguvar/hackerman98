@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hackerman98.unity
     guid: 7515c4d3410c4c34591d453cede77df8
+  - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: 24e0f8b7ab04e834b85f47dd4213a766
   m_configObjects: {}
