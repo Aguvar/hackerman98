@@ -2234,8 +2234,8 @@ MonoBehaviour:
   mailPenalty: 2
   pocosEmails: 3
   muchosEmails: 7
-  mailRandomMinTime: 1
-  mailRandomMaxTime: 5
+  mailRandomMinTime: 3
+  mailRandomMaxTime: 7
   mailDisplay: {fileID: 275903132332662717}
   mailFrom: {fileID: 275903131672522250}
   mailSubject: {fileID: 275903131299298821}
