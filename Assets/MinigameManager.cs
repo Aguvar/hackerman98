@@ -21,7 +21,7 @@ public class MinigameManager : MonoBehaviour
     private float progress = 0;
 
     private List<GameObject> UIHearts;
-
+    private GameObject[] hazardList;
     public UnityEvent gameOverEvent;
 
     private float spawnTimeCounter = 0f;
@@ -34,9 +34,8 @@ public class MinigameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    void initializeHearts()
     {
-
         UIHearts = new List<GameObject>();
         bat.gotHurtEvent.AddListener(gotHurt);
         for (int i = 0; i < bat.lives; i++)
@@ -46,6 +45,19 @@ public class MinigameManager : MonoBehaviour
             UIHeart.transform.parent = heartContainer.transform;
         }
     }
+    void Start()
+    {
+        initializeHearts();
+    }
+    void DestroyHazards()
+    {
+        hazardList = GameObject.FindGameObjectsWithTag("Hazard");
+        foreach (GameObject hazardo in hazardList)
+        {
+            Destroy(hazardo);
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -80,5 +92,22 @@ public class MinigameManager : MonoBehaviour
             Destroy(UIHearts[bat.lives]);
         }
     }
+    public void hideMinigame()
+    {
+        progressBar.value = 0f;
+        progress = 0f;
+        DestroyHazards();
+        progressBar.gameObject.SetActive(false);
+        heartContainer.gameObject.SetActive(false);
+        gameArea.SetActive(false);
+        gameObject.SetActive(false);
 
+    }
+    public void EnableMinigame()
+    {
+        progressBar.gameObject.SetActive(true);
+        heartContainer.gameObject.SetActive(true);
+        gameArea.SetActive(true);
+        
+    }
 }

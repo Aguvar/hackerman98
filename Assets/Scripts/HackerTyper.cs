@@ -9,6 +9,7 @@ using TMPro;
 public class HackerTyper : MonoBehaviour
 {
     //why bother
+    public MacroGameManager macroParent;
     public GameObject Paneloide;
     public TextMeshProUGUI PastaText;
     public string[] chosenPasta;
@@ -16,8 +17,8 @@ public class HackerTyper : MonoBehaviour
     //List <KeyCode> requestedInput = new List<KeyCode>();
     public float textCD; // cooldown before inputting more text
     private int magicNum;
-    private int pastaCount;
-    private int keyStrokeCount;
+    public int pastaCount;
+    public int keyStrokeCount;
 
     // Start is called before the first frame update
 
@@ -65,6 +66,8 @@ public class HackerTyper : MonoBehaviour
 
     public void BeginHack()
     {
+        Paneloide.SetActive(true);
+        PastaText.gameObject.SetActive(true);
         CoolTextStarter();
         PastaText.text = ("");
         pastaCount = 0;
@@ -80,7 +83,6 @@ public class HackerTyper : MonoBehaviour
 
     private void Start()
     {
-        Paneloide = GameObject.FindGameObjectWithTag("Panel");
     }
 
     //private void OnGUI(){
@@ -123,14 +125,10 @@ public class HackerTyper : MonoBehaviour
             {
                 keyStrokeCount++;
                 tecleo();
-
             }
         }
         textCD = textCD - 1 * Time.deltaTime;
-        if (keyStrokeCount == chosenPasta.Length - chosenPasta.Length / 10)
-        {
-            EndHack();
-        }
+
 
     }
 
