@@ -8,6 +8,9 @@ public class Firewall : MonoBehaviour
     public int currentPositionYIndex = 1;
     public float speed = 1f;
 
+    public SpriteRenderer spriteRenderer;
+    public AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +32,7 @@ public class Firewall : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        spriteRenderer.enabled = false;
+        audioSource.Play();
     }
 }
