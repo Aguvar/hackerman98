@@ -10,6 +10,8 @@ public class IntroManager : MonoBehaviour
     public int secondsForMusic = 2;
     public GameObject instructionsPanel;
 
+    public AudioSource clickSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,5 +55,10 @@ public class IntroManager : MonoBehaviour
             yield return null;
         }
         yield break;
+    }
+
+    public void PlayClickSound()
+    {
+        clickSource.Play();
     }
 }
