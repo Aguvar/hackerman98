@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MailsManager : MonoBehaviour {
 
@@ -14,9 +15,16 @@ public class MailsManager : MonoBehaviour {
     public int pocosEmails = 3;
     public int muchosEmails = 7;
 
-    public float mailRandomMin = 1f;
+    public float mailRandomMinTime = 1f;
 
-    public float mailRandomMax = 5f;
+    public float mailRandomMaxTime = 5f;
+
+    public TextMesh mailDisplay;
+
+    public TextMesh mailFrom;
+
+    public TextMesh mailSubject;
+
 
     private bool failGrace = false;
 
@@ -65,7 +73,7 @@ public class MailsManager : MonoBehaviour {
 
     private IEnumerator EmailAdder() {
         while (true) {
-            float timer = Random.Range(mailRandomMin, mailRandomMax);
+            float timer = Random.Range(mailRandomMinTime, mailRandomMaxTime);
             if (mailCount < pocosEmails) { //Si hay menos de 3 emails el timer se vuelve la mitad
                 timer = timer * 0.5f;
             }
@@ -136,6 +144,7 @@ public class MailsManager : MonoBehaviour {
         if (currentMail == null) {
             NextMail();
         }
+        mailDisplay.text = mailCount.ToString();
     }
 
     
@@ -181,6 +190,10 @@ public class MailsManager : MonoBehaviour {
     }
 
 
+    public static void SetMailMetadata(string from, string subject) {
+        Instance.mailFrom.text = from;
+        Instance.mailSubject.text = subject;
+    }
 
 
 }
