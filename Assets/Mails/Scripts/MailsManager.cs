@@ -47,6 +47,11 @@ public class MailsManager : MonoBehaviour {
         }
     }
 
+    public void Awake() {
+        _instance = this;
+    }
+
+
     public void Start() {
         SetupStart();
         StartCoroutine(EmailAdder());
@@ -116,6 +121,7 @@ public class MailsManager : MonoBehaviour {
     public void SetupStart() {
         mailCount = mailStart;
         NextMail();
+        mailDisplay.text = mailCount.ToString();
     }
 
 
@@ -138,6 +144,7 @@ public class MailsManager : MonoBehaviour {
         GameObject mailRef = currentMail;
         Destroy(mailRef);
         currentMail = null;
+        SetMailMetadata("","");
     }
 
     public void CheckNextEmail() {
@@ -150,8 +157,13 @@ public class MailsManager : MonoBehaviour {
     
 
     public void NextMail() {
-        mailCount = mailCount - 1;
-        LoadRandomEmail();
+        if (mailCount > 0) {
+            mailCount = mailCount - 1;
+            LoadRandomEmail();
+            mailDisplay.text = mailCount.ToString();
+        } else {
+            CloseEmail();
+        }
     }
 
     public void CheckTooManyMails() {
@@ -175,7 +187,7 @@ public class MailsManager : MonoBehaviour {
 
 
     private void MailWinInternal() {
-        LoadRandomEmail();
+        NextMail();
     }
 
     private void MailLoseInternal() {
