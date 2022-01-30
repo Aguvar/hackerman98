@@ -9,12 +9,14 @@ public class MinigameManager : MonoBehaviour
 
     public float timeBetweenSpawns = 3;
 
+    public GameObject gameArea;
     public Bat bat;
 
     public GameObject heartPrefab;
     public GameObject heartContainer;
     public Slider progressBar;
     public float gameTime = 1f;
+
 
     private float progress = 0;
 
@@ -46,6 +48,8 @@ public class MinigameManager : MonoBehaviour
             int positionYIndex = Random.Range(0, 3);
 
             GameObject firewall = Instantiate(firewallPrefab);
+
+            firewall.transform.parent = gameArea.transform;
 
             firewall.GetComponent<Firewall>().currentPositionYIndex = positionYIndex;
         }

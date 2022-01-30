@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class Bat : MonoBehaviour
 {
-    private float[] yPositions = { -3f, 0f, 3f };
+    private float[] yPositions = { -0.35f, -0.10f, 0.15f };
     private int currentPositionYIndex = 1;
     private float currentPositionX;
     private float interpolationDistance = 0;
@@ -32,7 +32,7 @@ public class Bat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localPosition = new Vector3(currentPositionX, Mathf.Lerp(transform.position.y, yPositions[currentPositionYIndex], interpolationDistance), 0);
+        transform.localPosition = new Vector3(currentPositionX, Mathf.Lerp(transform.localPosition.y, yPositions[currentPositionYIndex], interpolationDistance), 0);
 
         if (Input.GetKeyDown(KeyCode.W) && currentPositionYIndex < 2)
         {
