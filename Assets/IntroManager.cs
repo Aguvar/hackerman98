@@ -7,7 +7,7 @@ public class IntroManager : MonoBehaviour
 
     public GameObject creditPanel;
     public AudioSource trackSource;
-    public int secondsForMusic = 4;
+    public int secondsForMusic = 2;
     public GameObject instructionsPanel;
 
     // Start is called before the first frame update
@@ -46,10 +46,10 @@ public class IntroManager : MonoBehaviour
         float currentTime = 0;
         float start = trackSource.volume;
 
-        while (currentTime < 10)
+        while (currentTime < 5)
         {
             currentTime += Time.deltaTime;
-            trackSource.volume = Mathf.Lerp(start, 0.2f, currentTime / 10);
+            trackSource.volume = Mathf.Lerp(start, 0.2f, currentTime / 5);
             yield return null;
         }
         yield break;
