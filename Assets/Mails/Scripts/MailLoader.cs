@@ -12,7 +12,8 @@ public class MailLoader
     const string MISC_MAIL_PATH = "Misc";
 
     public static string GetRandomEmailPath() {
-        int rand = Random.Range(0,3);
+        //int rand = Random.Range(0,3);
+        int rand = 0;
         switch (rand) {
             case 0:
                 return GetNormalEmailPath();
@@ -32,12 +33,12 @@ public class MailLoader
     }
 
     public static string GetSpamEmailPath() {
-        string result = string.Format("{0}/{1}/{2}", BASE_PATH, SPAM_MAIL_PATH, spamMails[Random.Range(0,spamMails.Length)]);
+        string result = string.Format("{0}/{1}/{2}", BASE_PATH, SPAM_MAIL_PATH, spamMails[Random.Range(0,spamMails.Length - 1)]);
         return result;
     }
 
     public static string GetMiscEmailPath() {
-        string result = string.Format("{0}/{1}/{2}", BASE_PATH, MISC_MAIL_PATH, miscMails[Random.Range(0,miscMails.Length)]);
+        string result = string.Format("{0}/{1}/{2}", BASE_PATH, MISC_MAIL_PATH, miscMails[Random.Range(0,miscMails.Length - 1)]);
         return result;
     }
 
