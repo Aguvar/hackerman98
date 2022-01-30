@@ -3,12 +3,13 @@ using UnityEngine.Events;
 
 public class Bat : MonoBehaviour
 {
-    private float[] yPositions = { -3f, 0f, 3f };
+    private float[] yPositions = { -0.35f, -0.10f, 0.15f };
     private int currentPositionYIndex = 1;
     private float currentPositionX;
     private float interpolationDistance = 0;
 
     public int lives = 3;
+    public float speed = 1;
 
     public UnityEvent gotHurtEvent;
 
@@ -19,7 +20,7 @@ public class Bat : MonoBehaviour
         {
             gotHurtEvent = new UnityEvent();
         }
-        
+
     }
 
     // Start is called before the first frame update
@@ -32,7 +33,7 @@ public class Bat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localPosition = new Vector3(currentPositionX, Mathf.Lerp(transform.position.y, yPositions[currentPositionYIndex], interpolationDistance), 0);
+        transform.localPosition = new Vector3(currentPositionX, Mathf.Lerp(transform.localPosition.y, yPositions[currentPositionYIndex], interpolationDistance), 0);
 
         if (Input.GetKeyDown(KeyCode.W) && currentPositionYIndex < 2)
         {
@@ -47,8 +48,8 @@ public class Bat : MonoBehaviour
 
         if (interpolationDistance < 1)
         {
-            interpolationDistance += Time.deltaTime * 0.1f;
-        }   
+            interpolationDistance += Time.deltaTime * (speed / 10);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
