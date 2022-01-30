@@ -46,11 +46,35 @@ public class MailLoader
     static string[] normalMails = {
         "normal1",
         "normal2",
+        "normal3",
+        "normal4",
+        "normal5",
+        "normal6",
+        "normal7",
+        "normal8",
     };
 
     static string[] spamMails = {
         "spam1",
         "spam2",
+        "spam3",
+        "spam4",
+        "spam5",
+        "spam6",
+        "spam7",
+        "spam8",
+        "spam9",
+        "spam10",
+        "spam11",
+        "spam12",
+        "spam13",
+        "spam14",
+        "spam15",
+        "spam16",
+        "spam17",
+        "spam18",
+        "spam19",
+        "spam20",
     };
 
     static string[] miscMails = {
